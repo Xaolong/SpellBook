@@ -1,4 +1,4 @@
-function spell( info ){
+function Spell( info ){
     this.id = info.id;
     this.name = info.name;
     this.desc = info.desc;
@@ -7,18 +7,18 @@ function spell( info ){
     this.type = info.type;
 }
 
-spell.instances = {};
+Spell.instances = {};
 
 // spellListString = localStorage["spellList"];
 
 // spellList = Json.parse(spellListString);
 
-spell.convertRow2Obj = function (spellRow){
-    var spell = new spell(spellRow);
+Spell.convertRow2Obj = function (spellRow){
+    var spell = new Spell(spellRow);
     return spell;
 }
 
-spell.loadAll = function() {
+Spell.loadAll = function() {
     var i=0, key="", keys=[], spellListString = "", spellList={};
     try {
         if(localStorage["spellList"]){
@@ -33,52 +33,52 @@ spell.loadAll = function() {
         console.log(keys.length +" spells loaded");
         for(i=0;i<keys.length;i++){
             key = keys[i];
-            spell.instances[key]=spell.convertRow2Obj(spellList[key]);
+            Spell.instances[key]=Spell.convertRow2Obj(spellList[key]);
         }
     }
 };
 
-spell.saveAll = function() {
+Spell.saveAll = function() {
     var spellListString = "", error=false,
-    nmrOfSpells = Object.keys(spell.instances).length;
+    nmrOfSpells = Object.keys(Spell.instances).length;
     try {
-        spellListString=JSON.stringify(spell.instances);
+        spellListString=JSON.stringify(Spell.instances);
         localStorage["spellList"] = spellListString;
     } catch (e) {
         alert("Error when writing to local storage" + e);
         error=true;
     }
-    if(!error) console.log(nmrOfSpells + "spells saved.");
+    if(!error) console.log(nmrOfSpells + " spells saved.");
 };
 
-spell.add = function(info){
-    var spell = new spell(info);
-    spell.instances[info.id]= spell;
+Spell.add = function(info){
+    var Spell = new Spell(info);
+    Spell.instances[info.id]= Spell;
     console.log("Spell "+info.name+" added!");
 };
 
-spell.update= function(info){
-    var spell = spell.instances[info.id];
-    if(spell.desc!=info.desc) spell.desc=info.desc;
-    if(spell.name!=info.name) spell.name=info.name;
-    if(spell.duration!=info.duration) spell.duration=info.duration;
-    if(spell.alignemnt!=info.alignemnt) spell.alignemnt=info.alignemnt;
-    console.log("Spell" +spell.name +"modified");
+Spell.update= function(info){
+    var Spell = Spell.instances[info.id];
+    if(Spell.desc!=info.desc) Spell.desc=info.desc;
+    if(Spell.name!=info.name) Spell.name=info.name;
+    if(Spell.duration!=info.duration) Spell.duration=info.duration;
+    if(Spell.alignemnt!=info.alignemnt) Spell.alignemnt=info.alignemnt;
+    console.log("Spell" +Spell.name +"modified");
 }
 
-spell.destroy = function(id){
-    if(spell.instances[id]){
-        console.log("Spell "+ spell.instances[id].name+" deleted!");
-        delete spell.instances[id];
+Spell.destroy = function(id){
+    if(Spell.instances[id]){
+        console.log("Spell "+ Spell.instances[id].name+" deleted!");
+        delete Spell.instances[id];
     } else {
-        console.log("There is no such spell");
+        console.log("There is no such Spell");
     }
 };
 
-spell.createTestData = function(){
-    spell.instances[1] = new spell({id:1,name:"Light",desc:"Wololo",duration:5,alignemnt:"Good"});
-    spell.instances[2] = new spell({id:2,name:"Aid",desc:"Wololo",duration:5,alignemnt:"Good"});
-    spell.instances[3] = new spell({id:3,name:"Cure wounds, light",desc:"Wololo",duration:5,alignemnt:"Good"});
-    spell.instances[4] = new spell({id:4,name:"Bless",desc:"Wololo",duration:5,alignemnt:"Good"});
-    spell.saveAll();
+Spell.createTestData = function(){
+    Spell.instances[1] = new Spell({id:1,name:"Light",desc:"Wololo",duration:5,alignemnt:"Good"});
+    Spell.instances[2] = new Spell({id:2,name:"Aid",desc:"Wololo",duration:5,alignemnt:"Good"});
+    Spell.instances[3] = new Spell({id:3,name:"Cure wounds, light",desc:"Wololo",duration:5,alignemnt:"Good"});
+    Spell.instances[4] = new Spell({id:4,name:"Bless",desc:"Wololo",duration:5,alignemnt:"Good"});
+    Spell.saveAll();
 }
