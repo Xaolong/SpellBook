@@ -1,5 +1,4 @@
 function Spell( info ){
-    this.id = info.id;
     this.name = info.name;
     this.desc = info.desc;
     this.duration = info.duration;
@@ -52,13 +51,13 @@ Spell.saveAll = function() {
 };
 
 Spell.add = function(info){
-    var Spell = new Spell(info);
-    Spell.instances[info.id]= Spell;
+    var spell = new Spell(info);
+    Spell.instances[info.name] = spell;
     console.log("Spell "+info.name+" added!");
 };
 
 Spell.update= function(info){
-    var Spell = Spell.instances[info.id];
+    var Spell = Spell.instances[info.name];
     if(Spell.desc!=info.desc) Spell.desc=info.desc;
     if(Spell.name!=info.name) Spell.name=info.name;
     if(Spell.duration!=info.duration) Spell.duration=info.duration;
@@ -66,19 +65,19 @@ Spell.update= function(info){
     console.log("Spell" +Spell.name +"modified");
 }
 
-Spell.destroy = function(id){
-    if(Spell.instances[id]){
-        console.log("Spell "+ Spell.instances[id].name+" deleted!");
-        delete Spell.instances[id];
+Spell.destroy = function(name){
+    if(Spell.instances[name]){
+        console.log("Spell "+ Spell.instances[name].name+" deleted!");
+        delete Spell.instances[name];
     } else {
         console.log("There is no such Spell");
     }
 };
 
 Spell.createTestData = function(){
-    Spell.instances[1] = new Spell({id:1,name:"Light",desc:"Wololo",duration:5,alignemnt:"Good"});
-    Spell.instances[2] = new Spell({id:2,name:"Aid",desc:"Wololo",duration:5,alignemnt:"Good"});
-    Spell.instances[3] = new Spell({id:3,name:"Cure wounds, light",desc:"Wololo",duration:5,alignemnt:"Good"});
-    Spell.instances[4] = new Spell({id:4,name:"Bless",desc:"Wololo",duration:5,alignemnt:"Good"});
+    Spell.instances[1] = new Spell({name:"Light",desc:"Wololo",duration:5,alignemnt:"Good"});
+    Spell.instances[2] = new Spell({name:"Aname",desc:"Wololo",duration:5,alignemnt:"Good"});
+    Spell.instances[3] = new Spell({name:"Cure wounds, light",desc:"Wololo",duration:5,alignemnt:"Good"});
+    Spell.instances[4] = new Spell({name:"Bless",desc:"Wololo",duration:5,alignemnt:"Good"});
     Spell.saveAll();
 }

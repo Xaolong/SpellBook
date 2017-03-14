@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Minimal JS front-end App Example</title>
+  <script src="src/controller/initialize.js"></script>
+  <script src="src/model/spell.js"></script>
+  <script src="src/view/createSpell.js"></script>
+  <script>
+   window.addEventListener( "load", pl.view.createSpell.setupUserInterface);
+  </script>
+</head>
+<body>
+<h1>Create Spell</h1>
+    <form id="spell">
+      <p><label>Name: <input name="name"/></label></p>
+      <p><label>Description: <input name="desc"/></label></p>
+      <p><label>Duration: <input name="duration"/></label></p>
+      <p><label>Alignment: <input name="alignment"/></label></p>    
+      <p><label>Type: <input name="type"/></label></p>
+      <p><button type="button" name="commit" >Save</button></p>
+    </form>
+    <nav>
+      <a href="listSpells.html">Back to list</a></nav>
+    </nav>
+</body>
+</html>
